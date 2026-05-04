@@ -1,0 +1,64 @@
+{
+  "shape": "router_stress_dense",
+  "graph": "router_only",
+  "backend": "coreml",
+  "compute_unit": "CPU_AND_NE",
+  "actual_execution": "ANE",
+  "batch": 8,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 1.3502915,
+    "p95_ms": 2.2760603999999995,
+    "p99_ms": 3.9637504199999993,
+    "stddev_ms": 0.41828260386243565,
+    "first_call_ms": 2.876041,
+    "n_iters": 1000,
+    "n_warmup": 100
+  },
+  "boundary_us": 2.834,
+  "dispatch_us": 631.1455000000001,
+  "kernel_us": 716.3119999999999,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": "results/raw/router_router_stress_dense_b8.coreml_warnings.log",
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T22:55:28.267691+00:00",
+  "notes": "actual_execution must be populated from Instruments Core ML trace",
+  "compute_plan_op_counts": {
+    "n_total_ops": 9,
+    "n_compute_ops": 2,
+    "by_device": {
+      "MLComputeDeviceTypeNeuralEngine": 2
+    },
+    "by_class": {
+      "MLNeuralEngineComputeDevice": 2
+    },
+    "ops": [
+      {
+        "output": "logits_cast_fp16",
+        "preferred": "ANE",
+        "supported": [
+          "CPU",
+          "ANE"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "ANE",
+        "supported": [
+          "CPU",
+          "ANE"
+        ]
+      }
+    ]
+  }
+}

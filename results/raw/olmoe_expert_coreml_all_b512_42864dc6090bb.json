@@ -1,0 +1,93 @@
+{
+  "shape": "olmoe",
+  "graph": "expert",
+  "backend": "coreml",
+  "compute_unit": "ALL",
+  "actual_execution": "ANE",
+  "batch": 512,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 37.231292,
+    "p95_ms": 43.103458,
+    "p99_ms": 43.9053332,
+    "stddev_ms": 2.7350891905617853,
+    "first_call_ms": 41.2555,
+    "n_iters": 131,
+    "n_warmup": 20
+  },
+  "boundary_us": 118.1875,
+  "dispatch_us": 42935.0625,
+  "kernel_us": 0.0,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": "results/raw/expert_olmoe_b512.coreml_warnings.log",
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:26:23.986262+00:00",
+  "notes": "actual_execution must be populated from Instruments Core ML trace",
+  "compute_plan_op_counts": {
+    "n_total_ops": 23,
+    "n_compute_ops": 5,
+    "by_device": {
+      "MLComputeDeviceTypeNeuralEngine": 5
+    },
+    "by_class": {
+      "MLNeuralEngineComputeDevice": 5
+    },
+    "ops": [
+      {
+        "output": "u_cast_fp16",
+        "preferred": "ANE",
+        "supported": [
+          "CPU",
+          "GPU",
+          "ANE"
+        ]
+      },
+      {
+        "output": "input_1_cast_fp16",
+        "preferred": "ANE",
+        "supported": [
+          "CPU",
+          "GPU",
+          "ANE"
+        ]
+      },
+      {
+        "output": "g_cast_fp16",
+        "preferred": "ANE",
+        "supported": [
+          "CPU",
+          "GPU",
+          "ANE"
+        ]
+      },
+      {
+        "output": "input_cast_fp16",
+        "preferred": "ANE",
+        "supported": [
+          "CPU",
+          "GPU",
+          "ANE"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "ANE",
+        "supported": [
+          "CPU",
+          "GPU",
+          "ANE"
+        ]
+      }
+    ]
+  }
+}

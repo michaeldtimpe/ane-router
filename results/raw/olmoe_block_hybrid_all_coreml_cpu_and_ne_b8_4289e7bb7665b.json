@@ -1,0 +1,36 @@
+{
+  "shape": "olmoe",
+  "graph": "block",
+  "backend": "hybrid_all_coreml",
+  "compute_unit": "CPU_AND_NE",
+  "actual_execution": "ANE",
+  "batch": 8,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 0.7012915,
+    "p95_ms": 0.7520336499999999,
+    "p99_ms": 0.7987940799999994,
+    "stddev_ms": 0.026785954982301824,
+    "first_call_ms": 1.869333,
+    "n_iters": 200,
+    "n_warmup": 20
+  },
+  "boundary_us": 2.834,
+  "dispatch_us": 631.1455000000001,
+  "kernel_us": 67.3119999999999,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": "results/raw/block_all_olmoe_b8.coreml_warnings.log",
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:30:31.468790+00:00",
+  "notes": "single CoreML graph for the whole block. No MLX. actual_execution requires Instruments to confirm placement. (compute plan: ANE)"
+}

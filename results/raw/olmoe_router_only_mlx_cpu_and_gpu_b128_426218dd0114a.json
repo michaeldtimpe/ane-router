@@ -1,0 +1,67 @@
+{
+  "shape": "olmoe",
+  "graph": "router_only",
+  "backend": "mlx",
+  "compute_unit": "CPU_AND_GPU",
+  "actual_execution": "CPU",
+  "batch": 128,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 0.278812,
+    "p95_ms": 0.32658814999999997,
+    "p99_ms": 0.37654642,
+    "stddev_ms": 0.03417669157782356,
+    "first_call_ms": 0.3695,
+    "n_iters": 1000,
+    "n_warmup": 100
+  },
+  "boundary_us": 20.334,
+  "dispatch_us": 0.0,
+  "kernel_us": 278.812,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": null,
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T22:44:55.934956+00:00",
+  "notes": "",
+  "compute_plan_op_counts": {
+    "n_total_ops": 9,
+    "n_compute_ops": 2,
+    "by_device": {
+      "MLComputeDeviceTypeCPU": 2
+    },
+    "by_class": {
+      "MLCPUComputeDevice": 2
+    },
+    "ops": [
+      {
+        "output": "logits_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "CPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      }
+    ]
+  },
+  "actual_execution_history": [
+    "GPU (rail-signature, contradicted by compute plan)"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "shape": "mixtral-8x7b",
+  "graph": "block",
+  "backend": "hybrid_all_mlx",
+  "compute_unit": "CPU_AND_GPU",
+  "actual_execution": "GPU",
+  "batch": 32,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 7.849125,
+    "p95_ms": 8.740820849999999,
+    "p99_ms": 10.10844874999999,
+    "stddev_ms": 1.1744728739577257,
+    "first_call_ms": 7.218125,
+    "n_iters": 200,
+    "n_warmup": 20
+  },
+  "boundary_us": 7.041,
+  "dispatch_us": 0.0,
+  "kernel_us": 7849.125,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": null,
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:29:38.264478+00:00",
+  "notes": "all-MLX baseline (no boundary crossings)"
+}

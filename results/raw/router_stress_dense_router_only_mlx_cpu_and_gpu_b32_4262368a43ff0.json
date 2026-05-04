@@ -1,0 +1,64 @@
+{
+  "shape": "router_stress_dense",
+  "graph": "router_only",
+  "backend": "mlx",
+  "compute_unit": "CPU_AND_GPU",
+  "actual_execution": "GPU",
+  "batch": 32,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 0.495271,
+    "p95_ms": 1.00983305,
+    "p99_ms": 1.0498581599999999,
+    "stddev_ms": 0.18645011215970209,
+    "first_call_ms": 1.070375,
+    "n_iters": 1000,
+    "n_warmup": 100
+  },
+  "boundary_us": 7.041,
+  "dispatch_us": 0.0,
+  "kernel_us": 495.271,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": null,
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T22:45:03.900273+00:00",
+  "notes": "",
+  "compute_plan_op_counts": {
+    "n_total_ops": 9,
+    "n_compute_ops": 2,
+    "by_device": {
+      "MLComputeDeviceTypeGPU": 2
+    },
+    "by_class": {
+      "MLGPUComputeDevice": 2
+    },
+    "ops": [
+      {
+        "output": "logits_cast_fp16",
+        "preferred": "GPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "GPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      }
+    ]
+  }
+}

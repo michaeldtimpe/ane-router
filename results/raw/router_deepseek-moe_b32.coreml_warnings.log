@@ -1,0 +1,432 @@
+INFO coremltools: Converting graph.
+DEBUG coremltools: Adding op 'cast_0' of type cast
+DEBUG coremltools: Adding const op 'cast_0_dtype_0'
+DEBUG coremltools: Adding op 'cast_0_dtype_0' of type const
+DEBUG coremltools: Adding op 'gate.weight' of type const
+INFO coremltools: Converting op 3 : constant
+DEBUG coremltools: Adding op '3' of type const
+INFO coremltools: Converting op 4 : constant
+DEBUG coremltools: Adding op '4' of type const
+INFO coremltools: Converting op 5 : constant
+DEBUG coremltools: Adding op '5' of type const
+INFO coremltools: Converting op 6 : constant
+DEBUG coremltools: Adding op '6' of type const
+INFO coremltools: Converting op 7 : constant
+INFO coremltools: Converting op 9 : listconstruct
+DEBUG coremltools: Adding op '9' of type const
+INFO coremltools: Converting op 10 : listconstruct
+DEBUG coremltools: Adding op '10' of type const
+INFO coremltools: Converting op 11 : listconstruct
+DEBUG coremltools: Adding op '11' of type const
+INFO coremltools: Converting op 12 : listconstruct
+DEBUG coremltools: Adding op '12' of type const
+INFO coremltools: Converting op logits : _convolution
+DEBUG coremltools: Adding op 'gate.weight_promoted' of type const
+DEBUG coremltools: Adding op 'logits' of type conv
+DEBUG coremltools: Adding const op 'logits_pad_type_0'
+DEBUG coremltools: Adding op 'logits_pad_type_0' of type const
+DEBUG coremltools: Adding const op 'logits_strides_0'
+DEBUG coremltools: Adding op 'logits_strides_0' of type const
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Adding const op 'logits_pad_0'
+DEBUG coremltools: Adding op 'logits_pad_0' of type const
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Adding const op 'logits_dilations_0'
+DEBUG coremltools: Adding op 'logits_dilations_0' of type const
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Adding const op 'logits_groups_0'
+DEBUG coremltools: Adding op 'logits_groups_0' of type const
+INFO coremltools: Converting op 14 : constant
+DEBUG coremltools: Adding op '14' of type const
+INFO coremltools: Converting op 15 : constant
+INFO coremltools: Converting op 16 : softmax
+DEBUG coremltools: Adding op '16' of type softmax
+DEBUG coremltools: Program before frontend_pytorch pipeline:
+
+main[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+  } -> (%y)
+}
+
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+INFO coremltools: Removing op "12" (type: const)
+INFO coremltools: Removing op "11" (type: const)
+INFO coremltools: Removing op "10" (type: const)
+INFO coremltools: Removing op "9" (type: const)
+INFO coremltools: Removing op "6" (type: const)
+INFO coremltools: Removing op "5" (type: const)
+INFO coremltools: Removing op "4" (type: const)
+INFO coremltools: Removing op "3" (type: const)
+INFO coremltools: Removing op "gate.weight" (type: const)
+DEBUG coremltools: Performing pass: "common::loop_invariant_elimination"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "torch::torch_upsample_to_core_upsample"
+DEBUG coremltools: Performing pass: "torch::torch_tensor_assign_to_core"
+DEBUG coremltools: Program after frontend_pytorch pipeline:
+
+main[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+  } -> (%y)
+}
+
+DEBUG coremltools: Program before default pipeline:
+
+main[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+  } -> (%y)
+}
+
+DEBUG coremltools: Performing pass: "common::lower_complex_dialect_ops"
+DEBUG coremltools: Performing pass: "common::update_output_dtypes"
+DEBUG coremltools: Adding op 'cast_1' of type cast
+DEBUG coremltools: Adding const op 'cast_1_dtype_0'
+DEBUG coremltools: Adding op 'cast_1_dtype_0' of type const
+DEBUG coremltools: Performing pass: "common::cast_optimization"
+DEBUG coremltools: Performing pass: "common::noop_elimination"
+DEBUG coremltools: Performing pass: "common::int_op_canonicalization"
+DEBUG coremltools: Performing pass: "common::nullify_redundant_quantization_zero_point"
+DEBUG coremltools: Performing pass: "common::dequantize_quantize_pair_elimination"
+DEBUG coremltools: Performing pass: "common::distributive_quantized_binary_op_scale_normalization"
+DEBUG coremltools: Performing pass: "common::dequantize_to_constexpr"
+DEBUG coremltools: Performing pass: "common::canonicalize_quantized_lut_pattern"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::sanitize_input_output_names"
+DEBUG coremltools: Performing pass: "common::divide_to_multiply"
+DEBUG coremltools: Performing pass: "common::select_optimization"
+DEBUG coremltools: Performing pass: "common::add_conv_transpose_output_shape"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::const_deduplication"
+DEBUG coremltools: Performing pass: "common::loop_invariant_elimination"
+DEBUG coremltools: Performing pass: "common::remove_symbolic_reshape"
+INFO coremltools: remove_symbolic_reshape: changed 0 reshapes.
+DEBUG coremltools: Performing pass: "common::noop_elimination"
+DEBUG coremltools: Performing pass: "common::fuse_matmul_weight_bias"
+DEBUG coremltools: Performing pass: "common::fuse_linear_bias"
+DEBUG coremltools: Performing pass: "common::fuse_gelu_tanh_approximation"
+DEBUG coremltools: Adding op 'pow' of type pow
+DEBUG coremltools: Adding const op 'pow_y_0'
+DEBUG coremltools: Adding op 'pow_y_0' of type const
+DEBUG coremltools: Adding op 'mul_1' of type mul
+DEBUG coremltools: Adding const op 'mul_1_x_0'
+DEBUG coremltools: Adding op 'mul_1_x_0' of type const
+DEBUG coremltools: Adding op 'add' of type add
+DEBUG coremltools: Adding op 'mul_2' of type mul
+DEBUG coremltools: Adding const op 'mul_2_x_0'
+DEBUG coremltools: Adding op 'mul_2_x_0' of type const
+DEBUG coremltools: Adding op 'tanh' of type tanh
+DEBUG coremltools: Adding op 'add_1' of type add
+DEBUG coremltools: Adding const op 'add_1_x_0'
+DEBUG coremltools: Adding op 'add_1_x_0' of type const
+DEBUG coremltools: Adding op 'mul' of type mul
+DEBUG coremltools: Adding const op 'mul_x_0'
+DEBUG coremltools: Adding op 'mul_x_0' of type const
+DEBUG coremltools: Adding op 'mul_3' of type mul
+DEBUG coremltools: Adding op 'pow' of type pow
+DEBUG coremltools: Adding const op 'pow_y_1'
+DEBUG coremltools: Adding op 'pow_y_1' of type const
+DEBUG coremltools: Adding op 'mul_1' of type mul
+DEBUG coremltools: Adding const op 'mul_1_x_1'
+DEBUG coremltools: Adding op 'mul_1_x_1' of type const
+DEBUG coremltools: Adding op 'add' of type add
+DEBUG coremltools: Adding op 'mul_2' of type mul
+DEBUG coremltools: Adding const op 'mul_2_x_1'
+DEBUG coremltools: Adding op 'mul_2_x_1' of type const
+DEBUG coremltools: Adding op 'tanh' of type tanh
+DEBUG coremltools: Adding op 'add_1' of type add
+DEBUG coremltools: Adding const op 'add_1_x_1'
+DEBUG coremltools: Adding op 'add_1_x_1' of type const
+DEBUG coremltools: Adding op 'mul' of type mul
+DEBUG coremltools: Adding const op 'mul_x_1'
+DEBUG coremltools: Adding op 'mul_x_1' of type const
+DEBUG coremltools: Adding op 'mul_3' of type mul
+DEBUG coremltools: Performing pass: "common::fuse_gelu_exact"
+DEBUG coremltools: Performing pass: "common::fuse_leaky_relu"
+DEBUG coremltools: Performing pass: "common::rank0_expand_dims_swap"
+DEBUG coremltools: Performing pass: "common::fuse_squeeze_expand_dims"
+DEBUG coremltools: Performing pass: "common::compose_conv1d"
+DEBUG coremltools: Performing pass: "common::use_reflection_padding"
+DEBUG coremltools: Performing pass: "common::merge_consecutive_paddings"
+DEBUG coremltools: Performing pass: "common::fuse_pad_conv"
+DEBUG coremltools: Performing pass: "common::image_input_preprocess"
+DEBUG coremltools: Performing pass: "common::replace_stack_reshape"
+DEBUG coremltools: Performing pass: "common::reduce_transposes"
+DEBUG coremltools: Adding op 'identity_0' of type identity
+DEBUG coremltools: Block before optimize transpose transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y_type_fp32: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = cast(x=%y_type_fp32, dtype="fp16", name="cast_1")
+    %identity_0: (32, 66, 1, 1, fp16)(Tensor) = identity(x=%y, name="identity_0")
+  } -> (%identity_0)
+}
+
+DEBUG coremltools: Block after optimize transpose transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y_type_fp32: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = cast(x=%y_type_fp32, dtype="fp16", name="cast_1")
+  } -> (%y)
+}
+
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Performing pass: "common::fuse_dilated_conv"
+DEBUG coremltools: Performing pass: "common::fuse_conv_scale"
+DEBUG coremltools: Performing pass: "common::fuse_conv_bias"
+DEBUG coremltools: Performing pass: "common::fuse_onehot_matmul_to_gather"
+DEBUG coremltools: Performing pass: "common::fuse_layernorm_or_instancenorm"
+DEBUG coremltools: Block before fuse_layernorm_or_instancenorm transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y_type_fp32: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = cast(x=%y_type_fp32, dtype="fp16", name="cast_1")
+  } -> (%y)
+}
+
+DEBUG coremltools: Block after fuse_layernorm_or_instancenorm transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y_type_fp32: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = cast(x=%y_type_fp32, dtype="fp16", name="cast_1")
+  } -> (%y)
+}
+
+DEBUG coremltools: Performing pass: "common::fuse_elementwise_to_batchnorm"
+DEBUG coremltools: Performing pass: "common::fuse_reduce_mean"
+DEBUG coremltools: Performing pass: "common::fuse_conv_batchnorm"
+DEBUG coremltools: Performing pass: "common::fuse_conv_scale"
+DEBUG coremltools: Performing pass: "common::fuse_conv_bias"
+DEBUG coremltools: Performing pass: "common::fuse_conv_batchnorm"
+DEBUG coremltools: Performing pass: "common::detect_concat_interleave"
+DEBUG coremltools: Performing pass: "common::concat_to_pixel_shuffle"
+DEBUG coremltools: Performing pass: "common::fuse_prelu"
+DEBUG coremltools: Adding op 'neg' of type mul
+DEBUG coremltools: Adding const op 'neg_y_0'
+DEBUG coremltools: Adding op 'neg_y_0' of type const
+DEBUG coremltools: Adding op 'relu1' of type relu
+DEBUG coremltools: Adding op 'alpha_mul' of type mul
+DEBUG coremltools: Adding const op 'alpha_mul_y_0'
+DEBUG coremltools: Adding op 'alpha_mul_y_0' of type const
+DEBUG coremltools: Downcast const op alpha_mul_y_0 data fp64 as fp32
+DEBUG coremltools: Downcast const op alpha_mul_y_0 data fp64 as fp32
+DEBUG coremltools: Adding op 'relu2' of type relu
+DEBUG coremltools: Adding op 'out_op' of type add
+DEBUG coremltools: Adding op 'transpose' of type transpose
+DEBUG coremltools: Adding const op 'transpose_perm_0'
+DEBUG coremltools: Adding op 'transpose_perm_0' of type const
+DEBUG coremltools: Downcast const op transpose_perm_0 data int64 as int32
+DEBUG coremltools: Downcast const op transpose_perm_0 data int64 as int32
+DEBUG coremltools: Adding op 'neg' of type mul
+DEBUG coremltools: Adding const op 'neg_y_1'
+DEBUG coremltools: Adding op 'neg_y_1' of type const
+DEBUG coremltools: Adding op 'relu1' of type relu
+DEBUG coremltools: Adding op 'alpha_mul' of type mul
+DEBUG coremltools: Adding const op 'alpha_mul_y_1'
+DEBUG coremltools: Adding op 'alpha_mul_y_1' of type const
+DEBUG coremltools: Downcast const op alpha_mul_y_1 data fp64 as fp32
+DEBUG coremltools: Downcast const op alpha_mul_y_1 data fp64 as fp32
+DEBUG coremltools: Adding op 'relu2' of type relu
+DEBUG coremltools: Adding op 'out_op' of type add
+DEBUG coremltools: Performing pass: "common::prelu_to_lrelu"
+DEBUG coremltools: Performing pass: "common::merge_consecutive_relus"
+DEBUG coremltools: Performing pass: "common::merge_consecutive_reshapes"
+DEBUG coremltools: Performing pass: "common::merge_consecutive_transposes"
+DEBUG coremltools: Performing pass: "common::fuse_transpose_matmul"
+DEBUG coremltools: Performing pass: "common::expand_high_rank_reshape_and_transpose"
+DEBUG coremltools: Performing pass: "common::fuse_stack_split"
+DEBUG coremltools: Performing pass: "common::reduce_transposes"
+DEBUG coremltools: Adding op 'identity_1' of type identity
+DEBUG coremltools: Block before optimize transpose transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y_type_fp32: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = cast(x=%y_type_fp32, dtype="fp16", name="cast_1")
+    %identity_1: (32, 66, 1, 1, fp16)(Tensor) = identity(x=%y, name="identity_1")
+  } -> (%identity_1)
+}
+
+DEBUG coremltools: Block after optimize transpose transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %cast_0: (32, 2048, 1, 1, fp32)(Tensor) = cast(x=%x, dtype="fp32", name="cast_0")
+    %logits: (32, 66, 1, 1, fp32)(Tensor) = conv(x=%cast_0, weight=%gate.weight_promoted, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits")
+    %y_type_fp32: (32, 66, 1, 1, fp32)(Tensor) = softmax(x=%logits, axis=1, name="16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = cast(x=%y_type_fp32, dtype="fp16", name="cast_1")
+  } -> (%y)
+}
+
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Performing pass: "common::remove_redundant_ops"
+DEBUG coremltools: Performing pass: "common::dedup_op_and_var_names"
+DEBUG coremltools: Performing pass: "common::add_fp16_cast"
+DEBUG coremltools: Adding op 'cast_0_to_fp16' of type cast
+DEBUG coremltools: Adding const op 'cast_0_to_fp16_dtype_0'
+DEBUG coremltools: Adding op 'cast_0_to_fp16_dtype_0' of type const
+DEBUG coremltools: Adding op 'gate.weight_promoted_to_fp16' of type cast
+DEBUG coremltools: Adding const op 'gate.weight_promoted_to_fp16_dtype_0'
+DEBUG coremltools: Adding op 'gate.weight_promoted_to_fp16_dtype_0' of type const
+DEBUG coremltools: Adding op 'logits_cast_fp16' of type conv
+DEBUG coremltools: Adding op 'logits_cast_fp16_to_fp32' of type cast
+DEBUG coremltools: Adding const op 'logits_cast_fp16_to_fp32_dtype_0'
+DEBUG coremltools: Adding op 'logits_cast_fp16_to_fp32_dtype_0' of type const
+DEBUG coremltools: Num ops affected in replacing var: 1
+DEBUG coremltools: Adding op 'logits_cast_fp16_to_fp32_to_fp16' of type cast
+DEBUG coremltools: Adding const op 'logits_cast_fp16_to_fp32_to_fp16_dtype_0'
+DEBUG coremltools: Adding op 'logits_cast_fp16_to_fp32_to_fp16_dtype_0' of type const
+DEBUG coremltools: Adding op '16_cast_fp16' of type softmax
+DEBUG coremltools: Adding op '16_cast_fp16_to_fp32' of type cast
+DEBUG coremltools: Adding const op '16_cast_fp16_to_fp32_dtype_0'
+DEBUG coremltools: Adding op '16_cast_fp16_to_fp32_dtype_0' of type const
+DEBUG coremltools: Num ops affected in replacing var: 1
+DEBUG coremltools: Performing pass: "common::add_int16_cast"
+DEBUG coremltools: Performing pass: "common::update_output_dtypes"
+DEBUG coremltools: Performing pass: "common::guard_negative_gather_indices"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Adding op 'gate.weight_promoted_to_fp16' of type const
+DEBUG coremltools: Num ops affected in replacing var: 1
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+INFO coremltools: Removing op "gate.weight_promoted_to_fp16_dtype_0" (type: const)
+INFO coremltools: Removing op "gate.weight_promoted" (type: const)
+DEBUG coremltools: Performing pass: "common::cast_optimization"
+DEBUG coremltools: Num ops affected in replacing var: 1
+DEBUG coremltools: Num ops affected in replacing var: 1
+DEBUG coremltools: Num ops affected in replacing var: 0
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+INFO coremltools: Removing op "cast_1_dtype_0" (type: const)
+INFO coremltools: Removing op "16_cast_fp16_to_fp32" (type: cast)
+INFO coremltools: Removing op "16_cast_fp16_to_fp32_dtype_0" (type: const)
+INFO coremltools: Removing op "logits_cast_fp16_to_fp32_to_fp16_dtype_0" (type: const)
+INFO coremltools: Removing op "logits_cast_fp16_to_fp32" (type: cast)
+INFO coremltools: Removing op "logits_cast_fp16_to_fp32_dtype_0" (type: const)
+INFO coremltools: Removing op "cast_0_to_fp16_dtype_0" (type: const)
+INFO coremltools: Removing op "cast_0" (type: cast)
+INFO coremltools: Removing op "cast_0_dtype_0" (type: const)
+DEBUG coremltools: Performing pass: "common::add_int16_cast"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "common::cast_optimization"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::canonicalize_inplace_pattern"
+DEBUG coremltools: Performing pass: "common::prefer_state_in_downstream"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::cast_optimization"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::const_deduplication"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "common::merge_affine_dequantize_with_consecutive_ops"
+DEBUG coremltools: Performing pass: "common::expand_dynamic_linear"
+DEBUG coremltools: Performing pass: "common::fuse_transpose_matmul"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "common::const_deduplication"
+DEBUG coremltools: Performing pass: "common::loop_invariant_elimination"
+DEBUG coremltools: Performing pass: "common::noop_elimination"
+DEBUG coremltools: Performing pass: "common::dedup_op_and_var_names"
+DEBUG coremltools: Performing pass: "common::reduce_transposes"
+DEBUG coremltools: Adding op 'identity_2' of type identity
+DEBUG coremltools: Block before optimize transpose transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %logits_cast_fp16: (32, 66, 1, 1, fp16)(Tensor) = conv(x=%x, weight=%gate.weight_promoted_to_fp16, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits_cast_fp16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = softmax(x=%logits_cast_fp16, axis=1, name="16_cast_fp16")
+    %identity_2: (32, 66, 1, 1, fp16)(Tensor) = identity(x=%y, name="identity_2")
+  } -> (%identity_2)
+}
+
+DEBUG coremltools: Block after optimize transpose transform:
+function[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %logits_cast_fp16: (32, 66, 1, 1, fp16)(Tensor) = conv(x=%x, weight=%gate.weight_promoted_to_fp16, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits_cast_fp16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = softmax(x=%logits_cast_fp16, axis=1, name="16_cast_fp16")
+  } -> (%y)
+}
+
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_strides_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_pad_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Downcast const op logits_dilations_0 data int64 as int32
+DEBUG coremltools: Performing pass: "common::remove_redundant_ops"
+DEBUG coremltools: Performing pass: "common::topological_reorder"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Program after default pipeline:
+
+main[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %logits_cast_fp16: (32, 66, 1, 1, fp16)(Tensor) = conv(x=%x, weight=%gate.weight_promoted_to_fp16, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits_cast_fp16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = softmax(x=%logits_cast_fp16, axis=1, name="16_cast_fp16")
+  } -> (%y)
+}
+
+DEBUG coremltools: Program before backend_mlprogram pipeline:
+
+main[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %logits_cast_fp16: (32, 66, 1, 1, fp16)(Tensor) = conv(x=%x, weight=%gate.weight_promoted_to_fp16, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits_cast_fp16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = softmax(x=%logits_cast_fp16, axis=1, name="16_cast_fp16")
+  } -> (%y)
+}
+
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "mil_backend::adjust_io_to_supported_types"
+DEBUG coremltools: Performing pass: "mil_backend::insert_image_preprocessing_ops"
+DEBUG coremltools: Performing pass: "mil_backend::fuse_activation_silu"
+DEBUG coremltools: Performing pass: "mil_backend::fuse_pow2_sqrt"
+DEBUG coremltools: Performing pass: "common::const_elimination"
+DEBUG coremltools: Performing pass: "common::const_deduplication"
+DEBUG coremltools: Performing pass: "common::cast_optimization"
+DEBUG coremltools: Performing pass: "common::dead_code_elimination"
+DEBUG coremltools: Performing pass: "mil_backend::sanitize_name_strings"
+DEBUG coremltools: Performing pass: "common::dedup_op_and_var_names"
+DEBUG coremltools: Performing pass: "nn_backend::handle_unused_inputs"
+DEBUG coremltools: Program after backend_mlprogram pipeline:
+
+main[CoreML7](%x: (32, 2048, 1, 1, fp16)(Tensor)) {
+  block120() {
+    %logits_cast_fp16: (32, 66, 1, 1, fp16)(Tensor) = conv(x=%x, weight=%gate_weight_promoted_to_fp16, strides=[1, 1], pad_type="valid", pad=[0, 0, 0, 0], dilations=[1, 1], groups=1, name="logits_cast_fp16")
+    %y: (32, 66, 1, 1, fp16)(Tensor) = softmax(x=%logits_cast_fp16, axis=1, name="op_16_cast_fp16")
+  } -> (%y)
+}
+
+
+--- captured stderr ---
+Converting PyTorch Frontend ==> MIL Ops:   0%|          | 0/13 [00:00<?, ? ops/s]Converting PyTorch Frontend ==> MIL Ops:  92%|#########2| 12/13 [00:00<00:00, 6383.21 ops/s]
+Running MIL frontend_pytorch pipeline:   0%|          | 0/5 [00:00<?, ? passes/s]Running MIL frontend_pytorch pipeline: 100%|##########| 5/5 [00:00<00:00, 8591.36 passes/s]
+Running MIL default pipeline:   0%|          | 0/95 [00:00<?, ? passes/s]Running MIL default pipeline: 100%|##########| 95/95 [00:00<00:00, 5260.25 passes/s]
+Running MIL backend_mlprogram pipeline:   0%|          | 0/12 [00:00<?, ? passes/s]Running MIL backend_mlprogram pipeline: 100%|##########| 12/12 [00:00<00:00, 13172.38 passes/s]

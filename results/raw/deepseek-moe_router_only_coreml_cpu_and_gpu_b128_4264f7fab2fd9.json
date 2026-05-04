@@ -1,0 +1,64 @@
+{
+  "shape": "deepseek-moe",
+  "graph": "router_only",
+  "backend": "coreml",
+  "compute_unit": "CPU_AND_GPU",
+  "actual_execution": "CPU",
+  "batch": 128,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 3.1009585,
+    "p95_ms": 3.4315773999999997,
+    "p99_ms": 3.52728916,
+    "stddev_ms": 0.24769833367782684,
+    "first_call_ms": 2.915166,
+    "n_iters": 1000,
+    "n_warmup": 100
+  },
+  "boundary_us": 20.334,
+  "dispatch_us": 11065.957999999999,
+  "kernel_us": 0.0,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": "results/raw/router_deepseek-moe_b128.coreml_warnings.log",
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T22:48:13.261273+00:00",
+  "notes": "actual_execution must be populated from Instruments Core ML trace",
+  "compute_plan_op_counts": {
+    "n_total_ops": 9,
+    "n_compute_ops": 2,
+    "by_device": {
+      "MLComputeDeviceTypeCPU": 2
+    },
+    "by_class": {
+      "MLCPUComputeDevice": 2
+    },
+    "ops": [
+      {
+        "output": "logits_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "CPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      }
+    ]
+  }
+}

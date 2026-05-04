@@ -1,0 +1,36 @@
+{
+  "shape": "mixtral-8x7b",
+  "graph": "block",
+  "backend": "hybrid_router_ane",
+  "compute_unit": "CPU_AND_NE",
+  "actual_execution": "MIXED",
+  "batch": 8,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 7.8180415,
+    "p95_ms": 11.04964405,
+    "p99_ms": 13.068225089999999,
+    "stddev_ms": 1.6594558015680547,
+    "first_call_ms": 6.695417,
+    "n_iters": 200,
+    "n_warmup": 20
+  },
+  "boundary_us": 2.834,
+  "dispatch_us": 631.1455000000001,
+  "kernel_us": 7818.041499999999,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": "results/raw/block_router_mixtral-8x7b_b8.coreml_warnings.log",
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:29:06.211637+00:00",
+  "notes": "router on CoreML (compute_unit hint=NE), expert on MLX. actual_execution requires Instruments to confirm router placement."
+}

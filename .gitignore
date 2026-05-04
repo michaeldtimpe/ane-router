@@ -1,0 +1,17 @@
+# Python env / cache
+.venv-312/
+__pycache__/
+*.pyc
+
+# Large compiled CoreML packages — regenerate via conversion scripts
+models/*.mlpackage
+
+# Sweep run logs are noisy progress output; the JSON dataset captures the
+# real results. Per-conversion .coreml_warnings.log files (in results/raw/)
+# ARE included.
+results/*.log
+results/instruments/
+results/plots/
+
+# Claude agent state
+.claude/

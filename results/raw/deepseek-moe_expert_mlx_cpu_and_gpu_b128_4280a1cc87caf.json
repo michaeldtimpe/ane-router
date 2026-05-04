@@ -1,0 +1,88 @@
+{
+  "shape": "deepseek-moe",
+  "graph": "expert",
+  "backend": "mlx",
+  "compute_unit": "CPU_AND_GPU",
+  "actual_execution": "GPU",
+  "batch": 128,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 0.8914795,
+    "p95_ms": 0.9250122,
+    "p99_ms": 0.9870787499999997,
+    "stddev_ms": 0.02248082113708872,
+    "first_call_ms": 2.900708,
+    "n_iters": 200,
+    "n_warmup": 20
+  },
+  "boundary_us": 20.334,
+  "dispatch_us": 0.0,
+  "kernel_us": 891.4795,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": null,
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:19:54.261542+00:00",
+  "notes": "",
+  "compute_plan_op_counts": {
+    "n_total_ops": 23,
+    "n_compute_ops": 5,
+    "by_device": {
+      "MLComputeDeviceTypeGPU": 5
+    },
+    "by_class": {
+      "MLGPUComputeDevice": 5
+    },
+    "ops": [
+      {
+        "output": "u_cast_fp16",
+        "preferred": "GPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      },
+      {
+        "output": "input_1_cast_fp16",
+        "preferred": "GPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      },
+      {
+        "output": "g_cast_fp16",
+        "preferred": "GPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      },
+      {
+        "output": "input_cast_fp16",
+        "preferred": "GPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "GPU",
+        "supported": [
+          "CPU",
+          "GPU"
+        ]
+      }
+    ]
+  }
+}

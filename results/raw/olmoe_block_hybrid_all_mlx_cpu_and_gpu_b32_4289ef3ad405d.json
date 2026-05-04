@@ -1,0 +1,36 @@
+{
+  "shape": "olmoe",
+  "graph": "block",
+  "backend": "hybrid_all_mlx",
+  "compute_unit": "CPU_AND_GPU",
+  "actual_execution": "GPU",
+  "batch": 32,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 0.555729,
+    "p95_ms": 6.01533155,
+    "p99_ms": 8.5144405,
+    "stddev_ms": 1.8368941774600769,
+    "first_call_ms": 0.700625,
+    "n_iters": 200,
+    "n_warmup": 20
+  },
+  "boundary_us": 7.041,
+  "dispatch_us": 0.0,
+  "kernel_us": 555.729,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": null,
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:30:33.481165+00:00",
+  "notes": "all-MLX baseline (no boundary crossings)"
+}

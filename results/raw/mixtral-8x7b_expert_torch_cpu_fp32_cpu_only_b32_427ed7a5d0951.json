@@ -1,0 +1,83 @@
+{
+  "shape": "mixtral-8x7b",
+  "graph": "expert",
+  "backend": "torch_cpu_fp32",
+  "compute_unit": "CPU_ONLY",
+  "actual_execution": "CPU",
+  "batch": 32,
+  "precision": "fp32",
+  "timing": {
+    "median_ms": 27.245979,
+    "p95_ms": 30.842447899999993,
+    "p99_ms": 33.240217390000005,
+    "stddev_ms": 1.546177003662986,
+    "first_call_ms": 27.064917,
+    "n_iters": 180,
+    "n_warmup": 20
+  },
+  "boundary_us": 7.041,
+  "dispatch_us": 0.0,
+  "kernel_us": 27245.979,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": null,
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:17:51.268964+00:00",
+  "notes": "",
+  "compute_plan_op_counts": {
+    "n_total_ops": 23,
+    "n_compute_ops": 5,
+    "by_device": {
+      "MLComputeDeviceTypeCPU": 5
+    },
+    "by_class": {
+      "MLCPUComputeDevice": 5
+    },
+    "ops": [
+      {
+        "output": "u_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU"
+        ]
+      },
+      {
+        "output": "input_1_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU"
+        ]
+      },
+      {
+        "output": "g_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU"
+        ]
+      },
+      {
+        "output": "input_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "CPU",
+        "supported": [
+          "CPU"
+        ]
+      }
+    ]
+  }
+}

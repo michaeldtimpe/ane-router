@@ -1,0 +1,64 @@
+{
+  "shape": "mixtral-8x22b",
+  "graph": "router_only",
+  "backend": "coreml",
+  "compute_unit": "CPU_AND_NE",
+  "actual_execution": "CPU",
+  "batch": 32,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 1.5889795,
+    "p95_ms": 1.6925848000000001,
+    "p99_ms": 1.73600217,
+    "stddev_ms": 0.05738610030929734,
+    "first_call_ms": 1.715083,
+    "n_iters": 1000,
+    "n_warmup": 100
+  },
+  "boundary_us": 7.041,
+  "dispatch_us": 2456.2295,
+  "kernel_us": 0.0,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": "results/raw/router_mixtral-8x22b_b32.coreml_warnings.log",
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T22:46:20.953307+00:00",
+  "notes": "actual_execution must be populated from Instruments Core ML trace",
+  "compute_plan_op_counts": {
+    "n_total_ops": 9,
+    "n_compute_ops": 2,
+    "by_device": {
+      "MLComputeDeviceTypeCPU": 2
+    },
+    "by_class": {
+      "MLCPUComputeDevice": 2
+    },
+    "ops": [
+      {
+        "output": "logits_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU",
+          "ANE"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "CPU",
+        "supported": [
+          "CPU",
+          "ANE"
+        ]
+      }
+    ]
+  }
+}

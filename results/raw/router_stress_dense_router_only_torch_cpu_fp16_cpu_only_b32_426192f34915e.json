@@ -1,0 +1,62 @@
+{
+  "shape": "router_stress_dense",
+  "graph": "router_only",
+  "backend": "torch_cpu_fp16",
+  "compute_unit": "CPU_ONLY",
+  "actual_execution": "CPU",
+  "batch": 32,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 2.970541,
+    "p95_ms": 5.60674345,
+    "p99_ms": 5.68092017,
+    "stddev_ms": 0.9691800135892029,
+    "first_call_ms": 2.9815,
+    "n_iters": 1000,
+    "n_warmup": 100
+  },
+  "boundary_us": 7.041,
+  "dispatch_us": 0.0,
+  "kernel_us": 2970.5409999999997,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": null,
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T22:44:19.983831+00:00",
+  "notes": "",
+  "compute_plan_op_counts": {
+    "n_total_ops": 9,
+    "n_compute_ops": 2,
+    "by_device": {
+      "MLComputeDeviceTypeCPU": 2
+    },
+    "by_class": {
+      "MLCPUComputeDevice": 2
+    },
+    "ops": [
+      {
+        "output": "logits_cast_fp16",
+        "preferred": "CPU",
+        "supported": [
+          "CPU"
+        ]
+      },
+      {
+        "output": "y",
+        "preferred": "CPU",
+        "supported": [
+          "CPU"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "shape": "olmoe",
+  "graph": "block",
+  "backend": "hybrid_expert_ane",
+  "compute_unit": "CPU_AND_NE",
+  "actual_execution": "MIXED",
+  "batch": 8,
+  "precision": "fp16",
+  "timing": {
+    "median_ms": 1.0186454999999999,
+    "p95_ms": 1.382358,
+    "p99_ms": 1.42279875,
+    "stddev_ms": 0.15712674153354603,
+    "first_call_ms": 2.03675,
+    "n_iters": 200,
+    "n_warmup": 20
+  },
+  "boundary_us": 2.834,
+  "dispatch_us": 631.1455000000001,
+  "kernel_us": 1018.6454999999999,
+  "throughput_tok_s": 0.0,
+  "mj_per_token": 0.0,
+  "mw_idle_baseline": {},
+  "mw_steady": {},
+  "verify_ane_passed": false,
+  "instruments_trace": null,
+  "coreml_warnings_log": "results/raw/block_expert_olmoe_b8.coreml_warnings.log",
+  "host": {
+    "machine": "arm64",
+    "macos": "26.4.1",
+    "thermal_pressure": "nominal",
+    "ac_power": true
+  },
+  "ts": "2026-05-03T23:30:29.033651+00:00",
+  "notes": "router on MLX, expert on CoreML (compute_unit hint=NE). actual_execution requires Instruments to confirm expert placement."
+}
